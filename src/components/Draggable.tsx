@@ -1,5 +1,6 @@
 import React, { isValidElement, memo, ReactElement, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import { DEFAULT_ITEMTYPE } from '../constants';
 import { DraggableProps, DragItem } from '../types';
 import event from './event';
@@ -15,7 +16,7 @@ const Draggable: React.FC<DraggableProps> = memo((props) => {
     onDragStart,
   } = props;
 
-  const [collected, drag] = useDrag(
+  const [collected, drag, preview] = useDrag(
     () => ({
       type,
       item: data,
@@ -42,6 +43,10 @@ const Draggable: React.FC<DraggableProps> = memo((props) => {
       onDragStart?.(collected.item);
     }
   }, [isDragging]);
+
+  useEffect(() => {
+    preview(getEmptyImage(), { captureDraggingState: true }); // 隐藏拖拽dom
+  }, []);
 
   if (typeof children === 'string') {
     return (
