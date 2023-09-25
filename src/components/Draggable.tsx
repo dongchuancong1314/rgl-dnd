@@ -1,4 +1,4 @@
-import React, { isValidElement, memo, ReactElement } from 'react';
+import React, { isValidElement, memo, ReactElement, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { DEFAULT_ITEMTYPE } from '../constants';
